@@ -1,7 +1,2 @@
-python-telegram-bot
-googletrans
-certifi
-urllib3
-requests
-chardet
-idna
+python-telegram-bot==20.3
+googletrans==3.1.0a0
