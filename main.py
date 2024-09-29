@@ -107,7 +107,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await update.message.reply_text(
-            f"🔤 Original: {headline}\n\n"
             f"🔗 Slug: `{formatted_headline}`",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=reply_markup,
