@@ -13,7 +13,7 @@ from telegram.ext import (
     filters,
 )
 from telegram.constants import ParseMode
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 import re
 
 # Enable logging
@@ -21,9 +21,6 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 logger = logging.getLogger(__name__)
-
-# Initialize the translator
-translator = Translator()
 
 # Load bot token from environment variable for security
 TOKEN = os.getenv("SLUGIFY_BOT_TOKEN")
@@ -122,7 +119,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 async def translate_and_format(headline: str, separator: str = "-") -> str:
     """Translate and format the headline."""
     try:
-        translated_text = translator.translate(headline, dest="en").text
+        translator = GoogleTranslator(source='auto', target='en')
+        translated_text = translator.translate(headline)
         slugified_text = translated_text.lower().replace(" ", separator)
         slugified_text = re.sub(r"[^a-zA-Z0-9\-_]", "", slugified_text)
         return slugified_text
